@@ -3,3 +3,7 @@
     display: grid;
     place-content: center;
 }
+.title {
+    display: grid;
+    justify-content: center;
+}
