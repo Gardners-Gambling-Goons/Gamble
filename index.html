@@ -6,20 +6,38 @@
     <title>Document</title>
 </head>
 <body>
-    <audio autoplay>
-        <source src="Luigis_Casino_-_Super_Mario_64_DS_OST.wav" type="audio/wav" />
-        <source src="Katy_Perry_-_California_Gurls_Official_Music_Video_ft_Snoop_Dogg.mp3" type="audio/mpeg" />
-        
-    </audio>
+    <audio id="track1" src="Luigis_Casino_-_Super_Mario_64_DS_OST.wav"></audio>
+    <audio id="track2" src="Katy_Perry_-_California_Gurls_Official_Music_Video_ft_Snoop_Dogg.mp3"></audio>
+
     
+        
 
 
-    <h1>Casinoos :D</h1>
+    <h1>Casinoops :D</h1>
 
     <div>What game you like to play?</div>
     <ol>
         <li>Roulette</li>
         <li>Black Jack</li>
     </ol>
+
+
+    <script>
+        const tracks = [
+            document.getElementById('track1'),
+            document.getElementById('track2'),
+            
+        ];
+        let currentTrack = 0;
+
+        tracks[currentTrack].play();
+
+        tracks.forEach((track, index) => {
+            track.addEventListener('ended', () => {
+                currentTrack = (index + 1) % tracks.length;
+                tracks[currentTrack].play();
+            });
+        });
+    </script>
 </body>
 </html>
