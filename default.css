@@ -8,7 +8,7 @@
     border: 3px solid black;
 }
 
-.game {
+.games {
     display: grid;
     border: 3px solid black;
     justify-content: center;
