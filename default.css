@@ -13,5 +13,6 @@
     display: grid;
     border: 3px solid black;
     justify-content: center;
+    margin: 5px;
 }
 
