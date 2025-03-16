@@ -33,22 +33,53 @@
 
     <!-- JavaScript for BGM -->
     <script>
+        <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Background Music Loop</title>
+</head>
+<body>
+    <audio id="track1" src="path/to/your/first_track.mp3"></audio>
+    <audio id="track2" src="path/to/your/second_track.mp3"></audio>
+    <audio id="track3" src="path/to/your/third_track.mp3"></audio>
+
+    <script>
         const tracks = [
             document.getElementById('track1'),
             document.getElementById('track2'),
             document.getElementById('track3')
-            
         ];
         let currentTrack = 0;
 
-        tracks[currentTrack].play();
+        // Function to play the next track
+        function playNextTrack() {
+            // Pause all tracks
+            tracks.forEach(track => track.pause());
+            // Reset the current track to the beginning
+            tracks[currentTrack].currentTime = 0;
+            // Increment to next track, loop to first if at the end
+            currentTrack = (currentTrack + 1) % tracks.length;
+            // Play the next track
+            tracks[currentTrack].play();
+        }
 
-        tracks.forEach((track, index) => {
-            track.addEventListener('ended', () => {
-                currentTrack = (index + 1) % tracks.length;
+        // Delay playback for 1 second on page load
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                // Play the first track initially
                 tracks[currentTrack].play();
-            });
+            }, 1000); // 1000 milliseconds = 1 second
         });
+
+        // Add event listeners to each track
+        tracks.forEach(track => {
+            track.addEventListener('ended', playNextTrack);
+        });
+    </script>
+</body>
+</html>
     </script>
 </body>
 </html>
