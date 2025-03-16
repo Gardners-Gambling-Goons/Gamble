@@ -34,36 +34,38 @@
     <!-- JavaScript for BGM -->
     <script>
         const tracks = [
-            document.getElementById('track1'),
-            document.getElementById('track2'),
-            document.getElementById('track3')
-        ];
-        let currentTrack = 0;
+    document.getElementById('track1'),
+    document.getElementById('track2'),
+    document.getElementById('track3')
+];
+let currentTrack = 0;
 
-        // Function to play the next track
-        function playNextTrack() {
-            // Pause all tracks
-            tracks.forEach(track => track.pause());
-            // Reset the current track to the beginning
-            tracks[currentTrack].currentTime = 0;
-            // Increment to next track, loop to first if at the end
-            currentTrack = (currentTrack + 1) % tracks.length;
-            // Play the next track
-            tracks[currentTrack].play();
-        }
+// Create an AudioContext
+const audioContext = new (window.AudioContext || window.webkitAudioContext)();
 
-        // Delay playback for 1 second on page load
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                // Play the first track initially
-                tracks[currentTrack].play();
-            }, 1000); // 1000 milliseconds = 1 second
-        });
+// Function to play the next track
+function playNextTrack() {
+    // Pause all tracks
+    tracks.forEach(track => track.pause());
+    // Reset current track to the beginning
+    tracks[currentTrack].currentTime = 0;
+    // Increment to next track, loop to first if at the end
+    currentTrack = (currentTrack + 1) % tracks.length;
+    // Play next track
+    tracks[currentTrack].play();
+}
 
-        // Add event listeners to each track
-        tracks.forEach(track => {
-            track.addEventListener('ended', playNextTrack);
-        });
+// Delay the start using resume()
+setTimeout(() => {
+    audioContext.resume().then(() => {
+        tracks[currentTrack].play();
+    });
+}, 1000);
+
+// Add event listeners to each track
+tracks.forEach(track => {
+    track.addEventListener('ended', playNextTrack);
+});
     </script>
 </body>
 </html>
