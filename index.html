@@ -8,9 +8,9 @@
 </head>
 <body>
     <!--Background Music-->
-    <audio id="track1" src="Luigis_Casino_-_Super_Mario_64_DS_OST.wav"></audio>
-    <audio id="track2" src="Luigis_Casino_-_Super_Mario_64_DS_OST.wav"></audio>
-    <audio id="track3" src="Katy_Perry_-_California_Gurls_Official_Music_Video_ft_Snoop_Dogg.mp3"></audio>
+    <audio id="track1" src="Luigis_Casino_-_Super_Mario_64_DS_OST.wav" playsinline></audio>
+    <audio id="track2" src="Luigis_Casino_-_Super_Mario_64_DS_OST.wav" playsinline></audio>
+    <audio id="track3" src="Katy_Perry_-_California_Gurls_Official_Music_Video_ft_Snoop_Dogg.mp3" playsinline></audio>
 
 
 
@@ -34,38 +34,23 @@
     <!-- JavaScript for BGM -->
     <script>
         const tracks = [
-    document.getElementById('track1'),
-    document.getElementById('track2'),
-    document.getElementById('track3')
-];
-let currentTrack = 0;
+            document.getElementById('track1'),
+            document.getElementById('track2'),
+            document.getElementById('track3')
+        ];
+        let currentTrack = 0;
 
-// Create an AudioContext
-const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-
-// Function to play the next track
-function playNextTrack() {
-    // Pause all tracks
-    tracks.forEach(track => track.pause());
-    // Reset current track to the beginning
-    tracks[currentTrack].currentTime = 0;
-    // Increment to next track, loop to first if at the end
-    currentTrack = (currentTrack + 1) % tracks.length;
-    // Play next track
-    tracks[currentTrack].play();
-}
-
-// Delay the start using resume()
-setTimeout(() => {
-    audioContext.resume().then(() => {
         tracks[currentTrack].play();
-    });
-}, 1000);
 
-// Add event listeners to each track
-tracks.forEach(track => {
-    track.addEventListener('ended', playNextTrack);
-});
+        tracks.forEach((track, index) => {
+            track.addEventListener('ended', () => {
+                currentTrack = (index + 1) % tracks.length;
+                tracks[currentTrack].play();
+            });
+        });
+    </script>
+</body>
+</html>
     </script>
 </body>
 </html>
