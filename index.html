@@ -29,10 +29,17 @@
         </div>
     </div>
 
+    <button id="myButton" onclick="hideButton()">
+        ENTER THE CASINO
+    </button>
 
 
     <!-- JavaScript for BGM -->
     <script>
+
+        function hideButton() {
+            document.getElementById("myButton").style.display = "none";
+        }
         const tracks = [
             document.getElementById('track1'),
             document.getElementById('track2'),
