@@ -15,7 +15,7 @@
 
 
 
-    <div class="container">
+    <div class="container" id="container">
 
         <!-- Title -->
          <h1 class="title">Gardner's hGambling Gang</h1>
@@ -37,9 +37,10 @@
 
     <!-- JavaScript for BGM -->
     <script>
-
+document.getElementById("container").style.display = "none";
         function hideButton() {
             document.getElementById("myButton").style.display = "none";
+            document.getElementById("container").style.display = "block";
         }
         const tracks = [
             document.getElementById('track1'),
